@@ -1,0 +1,17 @@
+{
+    "yolo_coco": "yolo_tiny_data/coco.names",
+    "yolo_cfg": "yolo_tiny_data/yolov3-tiny.cfg",
+    "yolo_weights": "yolo_tiny_data/yolov3-tiny.weights",
+    "confidence": 0.5,
+    "threshold": 0.3,
+    "use_picamera": 0,
+    "camera_warmup_time": 2.0,
+    "resolution": [640, 480],
+    "fps": 16,
+    "image_input": "images/four_person_car.jpg",
+    "image_output": "output/tiny_detected_four_person_car.jpg",
+    "video_codec": "MJPG",
+    "video_input": "videos/traffic-cars.mp4",
+    "video_output": "output/tiny_detected_traffic-cars.avi",
+    "video_camera_output": "output/yolo_real_time.avi"
+}
