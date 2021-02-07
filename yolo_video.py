@@ -20,7 +20,7 @@ conf = json.load(open(args["conf"]))
 '''
 Input video 
 '''
-print("[INFO] loading video from file ...")
+print("[YOLO] loading video from file ...")
 
 # load input video
 vs = cv2.VideoCapture(conf["video_input"])
@@ -35,11 +35,11 @@ h, w = None, None
 try:
     prop = cv2.CAP_PROP_FRAME_COUNT
     total = int(vs.get(prop))
-    print("[INFO] {} total frames in video".format(total))
+    print("[YOLO] {} total frames in video".format(total))
 # an error occurred while trying to determine the total number of frames in the video file
 except:
-    print("[INFO] could not determine # of frames in video")
-    print("[INFO] no approx. completion time can be provided")
+    print("[YOLO] could not determine # of frames in video")
+    print("[YOLO] no approx. completion time can be provided")
     total = -1
 
 '''
@@ -56,8 +56,12 @@ with open(labels_path) as f:
 weights_path = conf["yolo_weights"]
 config_path = conf["yolo_cfg"]
 # load YOLO object detector
-print("[INFO] loading YOLO from disk ...")
+start_time = time.time()
+print("[YOLO] loading YOLO model from disk...")
 network = cv2.dnn.readNetFromDarknet(config_path, weights_path)
+end_time = time.time()
+elapsed_time = end_time - start_time
+print("[YOLO] model loaded ... took {} seconds".format(elapsed_time))
 
 # get list of all layers from YOLO network
 layers_names_all = network.getLayerNames()
@@ -198,19 +202,19 @@ while True:
         # some information on processing single frame
         if total > 0:
             elap = (end - start)
-            print("[INFO] single frame took {:.4f} seconds".format(elap))
-            print("[INFO] estimated total time to finish: {:.4f}".format(elap * total))
+            print("[YOLO] single frame took {:.4f} seconds".format(elap))
+            print("[YOLO] estimated total time to finish: {:.4f}".format(elap * total))
 
     # write processed current frame to the file
     writer.write(frame)
     
 # print final results
 print()
-print("[INFO] total number of frames", f)
-print("[INFO] total amount of time {:.5f} seconds".format(t))
-print("[INFO] fps:", round((f / t), 1))
+print("[YOLO] total number of frames", f)
+print("[YOLO] total amount of time {:.5f} seconds".format(t))
+print("[YOLO] fps:", round((f / t), 1))
 print()
-print("[INFO] cleaning up")
+print("[YOLO] cleaning up")
 
 # release video reader and writer
 vs.release()

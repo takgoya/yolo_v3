@@ -20,7 +20,7 @@ conf = json.load(open(args["conf"]))
 '''
 Image
 '''
-print("[INFO] loading image from file ...")
+print("[YOLO] loading image from file ...")
 # load input image
 image = cv2.imread(conf["image_input"])
 # get spatial dimensions from input image
@@ -46,8 +46,12 @@ with open(labels_path) as f:
 weights_path = conf["yolo_weights"]
 config_path = conf["yolo_cfg"]
 # load YOLO object detector
-print("[INFO] loading YOLO from disk ...")
+start_time = time.time()
+print("[YOLO] loading YOLO model from disk...")
 network = cv2.dnn.readNetFromDarknet(config_path, weights_path)
+end_time = time.time()
+elapsed_time = end_time - start_time
+print("[YOLO] model loaded ... took {} seconds".format(elapsed_time))
 
 # get list of all layers from YOLO network
 layers_names_all = network.getLayerNames()
@@ -75,7 +79,7 @@ output_from_network = network.forward(layers_names_output)
 end = time.time()
 
 # show spent time for forward pass
-print("[INFO] objects detection took {:.6f} seconds".format(end - start))
+print("[YOLO] objects detection took {:.6f} seconds".format(end - start))
 
 '''
 Get bounding boxes
@@ -129,7 +133,7 @@ if len(final_boxes) > 0:
     # loop over the indexes
     for i in final_boxes.flatten():
         # show labels of the detected objects
-        print("[INFO] object {0}: {1}".format(counter, labels[int(class_numbers[i])]))
+        print("[YOLO] object {0}: {1}".format(counter, labels[int(class_numbers[i])]))
         # Incrementing counter
         counter += 1
 

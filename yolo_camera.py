@@ -24,7 +24,7 @@ Input video
 '''
 # initialize the video stream and allow the camera
 # sensor to warmup
-print("[INFO] warming up camera...")
+print("[YOLO] warming up camera...")
 vs = VideoStream(usePiCamera=conf["use_picamera"],
                  resolution=tuple(conf["resolution"]),
                  framerate=conf["fps"]).start()
@@ -36,7 +36,7 @@ fps = FPS().start()
 writer = None
 # prepare variables for spatial dimensions of the frames
 h, w = None, None
-print("[INFO] starting video from camera ...")
+print("[YOLO] starting video from camera ...")
 
 '''
 Load YOLO v3 network
@@ -52,8 +52,12 @@ with open(labels_path) as f:
 weights_path = conf["yolo_weights"]
 config_path = conf["yolo_cfg"]
 # load YOLO object detector
-print("[INFO] loading YOLO from disk ...")
+start_time = time.time()
+print("[YOLO] loading YOLO model from disk...")
 network = cv2.dnn.readNetFromDarknet(config_path, weights_path)
+end_time = time.time()
+elapsed_time = end_time - start_time
+print("[YOLO] model loaded ... took {} seconds".format(elapsed_time))
 
 # get list of all layers from YOLO network
 layers_names_all = network.getLayerNames()
@@ -105,7 +109,7 @@ while True:
     end = time.time()
     
     # show spent time for forward pass
-    print("[INFO] current frame took {:.6f} seconds".format(end - start))
+    print("[YOLO] current frame took {:.6f} seconds".format(end - start))
 
     '''
     Get bounding boxes
@@ -200,11 +204,11 @@ Finish
 '''
 # stop the timer and display FPS information
 fps.stop()
-print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
-print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+print("[YOLO] elasped time: {:.2f}".format(fps.elapsed()))
+print("[YOLO] approx. FPS: {:.2f}".format(fps.fps()))
 
 # do a bit of cleanup
-print("[INFO] cleaning up")
+print("[YOLO] cleaning up")
 # release video reader and writer
 vs.stop()
 writer.release()

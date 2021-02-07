@@ -2,16 +2,16 @@
     "yolo_coco": "yolo_v3_data/coco.names",
     "yolo_cfg": "yolo_v3_data/yolov3.cfg",
     "yolo_weights": "yolo_v3_data/yolov3.weights",
-    "confidence": 0.3,
+    "confidence": 0.5,
     "threshold": 0.3,
-    "use_picamera": 0,
+    "use_picamera": 1,
     "camera_warmup_time": 2.0,
     "resolution": [640, 480],
     "fps": 16,
-    "image_input": "images/four_person_car.jpg",
-    "image_output": "output/v3_detected_four_person_car.jpg",
+    "image_input": "media/images/trucks.jpg",
+    "image_output": "media/output/trucks.jpg",
     "video_codec": "MJPG",
-    "video_input": "videos/traffic-cars.mp4",
-    "video_output": "output/v3_detected_traffic-cars.avi",
-    "video_camera_output": "output/v3_yolo_real_time.avi"
+    "video_input": "media/videos/video2.mp4",
+    "video_output": "media/output/video2.avi",
+    "video_camera_output": "media/output/v3_yolo_real_time.avi"
 }
