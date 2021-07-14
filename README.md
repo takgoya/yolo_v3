@@ -1,9 +1,6 @@
 # yolo_v3
 YOLOv3 object detector with OpenCV dnn module
 
-# ssd
-SSD object detector with Caffe and Openv dnn module
-
 - Modelo YOLOv3 pre entrenado --> **/yolo_data**
 
 - Modelo Tiny YOLOv3 pre entrenado --> **/yolo_tiny_data**
