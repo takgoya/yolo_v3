@@ -13,7 +13,7 @@ YOLOv3 object detector with OpenCV dnn module
 
 - Detecciones sobre archivo de vídeo --> **yolo_video.py**
 
-- Detecciones sobre una imágen --> **yolo_image.py**
+- Detecciones sobre una imagen --> **yolo_image.py**
  
 - Directorio con imáges/vídeos/capturas procesados --> **/media**
 
